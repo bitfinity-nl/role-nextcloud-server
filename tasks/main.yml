@@ -46,7 +46,7 @@
     insertafter: "#ServerName www.example.com"
     block: |2
               ServerName {{ certbot_servername }}
-              ServerAlias {{ certbot_serveralias }}
+	      ServerAlias {{ certbot_serveralias }}
               <Directory /srv/nextcloud/>
 	                Options +FollowSymlinks
 	                AllowOverride All
