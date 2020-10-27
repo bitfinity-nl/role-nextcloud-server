@@ -50,12 +50,12 @@
               <Directory /srv/nextcloud/>
 	                Options +FollowSymlinks
 	                AllowOverride All
-                  Require all granted
- 	                SetEnv HOME /srv/nextcloud
- 	                SetEnv HTTP_HOME /srv/nextcloud
- 	                <IfModule mod_dav.c>
-  	                Dav off
-                 </IfModule>
+                        Require all granted
+                        SetEnv HOME /srv/nextcloud
+                        SetEnv HTTP_HOME /srv/nextcloud
+                       <IfModule mod_dav.c>
+                         Dav off
+                      </IfModule>
               </Directory>
 
 
