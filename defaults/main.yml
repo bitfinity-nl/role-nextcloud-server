@@ -23,7 +23,8 @@
 #   Override the default here, in your playbook or group_vars.   
 #
 nc_src_url          : 'https://github.com/nextcloud/server/releases/download/v20.0.1/nextcloud-20.0.1.zip'
-nc_mariadb_dbname   : 'nextcloud' 
+nc_mariadb_dbname   : 'nextcloud'
+nc_mariadb_user     : 'nextcloud'
 nc_mariadb_pass     : 'ChangeMe'
 nc_mariadb_root     : '{{ def_mariadb_user }}'
 nc_mariadb_root_pwd : '{{ def_mariadb_pass }}'
