@@ -1,0 +1,72 @@
+---
+# Title: role-nextcloud-server
+#
+# Author: Bitfinity-NL / L. Rutten
+# File: tasks/main.yml
+#
+# Description:
+#   Role for deploy a Nextcloud server.
+#
+# https://computingforgeeks.com/how-to-install-nextcloud-on-ubuntu-debian/
+
+
+- name: "Install APT packages"
+  apt:
+    pkg:
+    - apache2
+    - libapache2-mod-php
+    - php-cli 
+    - php-fpm 
+    - php-json 
+    - php-intl 
+    - php-imagick 
+    - php-pdo 
+    - php-mysql 
+    - php-zip 
+    - php-gd 
+    - php-mbstring 
+    - php-curl 
+    - php-xml 
+    - php-pear 
+    - php-bcmath
+    - wget
+    - unzip
+    
+- name: "Unarchive zip to /var/www/html" 
+  unarchive:
+    src: "{{ nc_src_url }}" 
+    dest: /var/www/html
+    remote_src: yes
+
+- name: "Configure Apache2 000-default.conf for nextcloud"
+  blockinfile:
+    backup: yes
+    path: /etc/apache2/sites-available/000-default.conf
+    marker: "        #<!-- Nextcloud - ANSIBLE MANAGED BLOCK -->"
+    insertafter: "#ServerName www.example.com"
+    block: |2
+              ServerName {{ certbot_servername }}
+              ServerAlias {{ certbot_serveralias }}
+              <Directory /srv/nextcloud/>
+	                Options +FollowSymlinks
+	                AllowOverride All
+                  Require all granted
+ 	                SetEnv HOME /srv/nextcloud
+ 	                SetEnv HTTP_HOME /srv/nextcloud
+ 	                <IfModule mod_dav.c>
+  	                Dav off
+                 </IfModule>
+              </Directory>
+
+
+- name: "Enable Apache2 modules"
+  apache2_module:
+    state: present
+    name: wsgi
+  with_items:
+    - rewrite
+    - dir
+    - mime
+    - env
+    - headers
+   notify: restart_apache2
