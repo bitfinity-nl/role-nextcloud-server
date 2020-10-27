@@ -38,6 +38,9 @@
   unarchive:
     src: "{{ nc_src_url }}" 
     dest: /opt/
+    owner: www-data
+    group: www-data
+    mode: '0755'
     remote_src: yes
 
 - name: "Create symlink from /opt/nextcloud to /var/www/html"
@@ -56,14 +59,12 @@
     marker: "        #<!-- Nextcloud - ANSIBLE MANAGED BLOCK -->"
     insertbefore: "</VirtualHost>"
     block: |2
-              ServerName {{ nc_servername }}
-              ServerAlias {{ nc_serveralias }}
-              <Directory /srv/nextcloud/>
+              <Directory /opt/nextcloud/>
                   Options +FollowSymlinks
                   AllowOverride All
                   Require all granted
-                  SetEnv HOME /srv/nextcloud
-                  SetEnv HTTP_HOME /srv/nextcloud
+                  SetEnv HOME /opt/nextcloud
+                  SetEnv HTTP_HOME /opt/nextcloud
                   <IfModule mod_dav.c>
                     Dav off
                   </IfModule>
