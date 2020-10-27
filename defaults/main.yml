@@ -15,9 +15,12 @@
 # Variable(s):
 #   nc_src_url : 'https://download.nextcloud.com/server/releases/nextcloud-20.0.1.zip'  # Set source URL.
 #   nc_mariadb_dbname   : 'nextcloud'                                                   # Set MariaDB database name.
+#   nc_mariadb_user     : 'nextcloud'                                                   # Set MariaDB database user.
 #   nc_mariadb_pass     : 'ChangeMe'                                                    # Set MariaDB database password.
 #   nc_mariadb_root     : '{{ def_mariadb_user }}'                                      # Set MariaDB root account.
 #   nc_mariadb_root_pwd : '{{ def_mariadb_pass }}'                                      # Set MariaDB root password.
+#   nc_nextcloud_admin  : 'sysadmin'                                                    # Set Nextcloud administrator username.
+#   nc_nextcloud_pass   : 'Password'                                                    # Set Nextcloud administrator password.
 #
 # Comment:
 #   Override the default here, in your playbook or group_vars.   
@@ -28,3 +31,5 @@ nc_mariadb_user     : 'nextcloud'
 nc_mariadb_pass     : 'ChangeMe'
 nc_mariadb_root     : '{{ def_mariadb_user }}'
 nc_mariadb_root_pwd : '{{ def_mariadb_pass }}'
+nc_nextcloud_admin  : 'sysadmin'
+nc_nextcloud_pass   : 'Password'
