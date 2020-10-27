@@ -1,0 +1,13 @@
+---
+# Title: role-nextcloud-server
+#
+# Author: Bitfinity-NL / L. Rutten
+# File: handlers/main.yml
+#
+# Description:
+#   Role for deploy a Nextcloud server.
+
+- name: "restart_apache2"
+  systemd:
+    state: restarted
+    name: apache2
