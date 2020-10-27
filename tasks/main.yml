@@ -66,4 +66,5 @@
     - mime
     - env
     - headers
-   notify: restart_apache2
+  notify:
+     - restart_apache2
