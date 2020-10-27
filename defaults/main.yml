@@ -1,0 +1,10 @@
+---
+# Title: role-nextcloud-server
+#
+# Author: Bitfinity-NL / L. Rutten
+# File: defaults/main.yml
+#
+# Description:
+#   Role for deploy a Nextcloud server.
+#
+# https://computingforgeeks.com/how-to-install-nextcloud-on-ubuntu-debian/
