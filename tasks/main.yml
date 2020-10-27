@@ -28,12 +28,25 @@
     - php-bcmath
     - wget
     - unzip
-    
+
+- name: "Remove directory /var/www/html"
+  file:
+    path: /var/www/html
+    state: absent
+
 - name: "Unarchive zip to /var/www/html" 
   unarchive:
     src: "{{ nc_src_url }}" 
-    dest: /var/www/html
+    dest: /opt/
     remote_src: yes
+
+- name: "Create symlink from /opt/nextcloud to /var/www/html"
+  file:
+    src: /opt/nextcloud
+    dest: /var/www/html
+    owner: root
+    group: root
+    mode: '0755'
 
 #- name: "Configure Apache2 000-default.conf for nextcloud"
 #  blockinfile:
