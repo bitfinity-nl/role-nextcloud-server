@@ -9,10 +9,18 @@
 #
 # https://computingforgeeks.com/how-to-install-nextcloud-on-ubuntu-debian/
 
+
 #-- Default role-nextcloud-server --
 #
 # Variable(s):
 #   nc_src_url : 'https://download.nextcloud.com/server/releases/nextcloud-20.0.1.zip'  # Set source URL.
+#   nc_mariadb_dbname   : 'nextcloud'                                                   # Set MariaDB database name.
+#   nc_mariadb_pass     : 'ChangeMe'                                                    # Set MariaDB database password.
+#   nc_mariadb_root     : '{{ def_mariadb_user }}'                                      # Set MariaDB root account.
+#   nc_mariadb_root_pwd : '{{ def_mariadb_pass }}'                                      # Set MariaDB root password.
+#
+# Comment:
+#   Override the default here, in your playbook or group_vars.   
 #
 nc_src_url          : 'https://github.com/nextcloud/server/releases/download/v20.0.1/nextcloud-20.0.1.zip'
 nc_mariadb_dbname   : 'nextcloud' 
