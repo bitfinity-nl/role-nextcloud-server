@@ -41,8 +41,8 @@
 
 - name: "Create initial database user"
   mysql_user:
-    name: "{{ nc_mariadb_zbx_user }}"
-    password: "{{ nc_mariadb_zbx_pass }}"
+    name: "{{ nc_mariadb_user }}"
+    password: "{{ nc_mariadb_pass }}"
     priv: "{{ nc_mariadb_dbname }}.*:ALL,GRANT"
     state: present
     login_user: "{{ nc_mariadb_root }}"
