@@ -46,16 +46,16 @@
     insertafter: "#ServerName www.example.com"
     block: |2
               ServerName {{ certbot_servername }}
-	      ServerAlias {{ certbot_serveralias }}
+              ServerAlias {{ certbot_serveralias }}
               <Directory /srv/nextcloud/>
-	                Options +FollowSymlinks
-	                AllowOverride All
-                        Require all granted
-                        SetEnv HOME /srv/nextcloud
-                        SetEnv HTTP_HOME /srv/nextcloud
-                       <IfModule mod_dav.c>
-                         Dav off
-                      </IfModule>
+                  Options +FollowSymlinks
+                  AllowOverride All
+                  Require all granted
+                  SetEnv HOME /srv/nextcloud
+                  SetEnv HTTP_HOME /srv/nextcloud
+                  <IfModule mod_dav.c>
+                    Dav off
+                  </IfModule>
               </Directory>
 
 
