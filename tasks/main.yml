@@ -105,3 +105,13 @@
     - headers
   notify:
     - restart_apache2
+
+- name: "Configure Nextcloud from commandline"
+  shell:
+    cmd: |
+      sudo -u www-data php occ  maintenance:install 
+      --database "mysql" --database-name "{{ nc_mariadb_dbname }}" 
+      --database-user "{{ nc_mariadb_user }}" --database-pass "{{ nc_mariadb_pass }}" 
+      --admin-user "{{ nc_nextcloud_admin }}" --admin-pass "{{ nc_nextcloud_pass }}"
+    chdir: /opt/nextcloud/
+  
