@@ -59,7 +59,7 @@
 - name: "Enable Apache2 modules"
   apache2_module:
     state: present
-    name: wsgi
+    name: "{{ item }}"
   with_items:
     - rewrite
     - dir
