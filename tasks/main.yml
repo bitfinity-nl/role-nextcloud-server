@@ -108,7 +108,7 @@
 
 - name: "Configure Nextcloud from commandline"
   shell:
-    cmd: |
+    cmd: >
       sudo -u www-data php occ  maintenance:install 
       --database "mysql" --database-name "{{ nc_mariadb_dbname }}" 
       --database-user "{{ nc_mariadb_user }}" --database-pass "{{ nc_mariadb_pass }}" 
