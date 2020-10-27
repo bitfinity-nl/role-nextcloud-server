@@ -29,6 +29,26 @@
     - wget
     - unzip
 
+- name: "Create initial database"
+  mysql_db:
+    name: "{{ nc_mariadb_dbname }}"
+    encoding: utf8
+    collation: utf8_bin
+    state: present
+    login_user: "{{ nc_mariadb_root }}"
+    login_password: "{{ nc_mariadb_root_pwd }}"
+  notify:
+
+- name: "Create initial database user"
+  mysql_user:
+    name: "{{ nc_mariadb_zbx_user }}"
+    password: "{{ nc_mariadb_zbx_pass }}"
+    priv: "{{ nc_mariadb_dbname }}.*:ALL,GRANT"
+    state: present
+    login_user: "{{ nc_mariadb_root }}"
+    login_password: "{{ nc_mariadb_root_pwd }}"
+  no_log: True
+  
 - name: "Remove directory /var/www/html"
   file:
     path: /var/www/html
