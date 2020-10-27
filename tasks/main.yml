@@ -34,7 +34,7 @@
     path: /var/www/html
     state: absent
 
-- name: "Unarchive zip to /var/www/html" 
+- name: "Unarchive zip to /opt/nextcloud" 
   unarchive:
     src: "{{ nc_src_url }}" 
     dest: /opt/
@@ -47,6 +47,7 @@
     owner: root
     group: root
     mode: '0755'
+    state: link
 
 #- name: "Configure Apache2 000-default.conf for nextcloud"
 #  blockinfile:
