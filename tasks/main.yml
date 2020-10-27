@@ -67,4 +67,4 @@
     - env
     - headers
   notify:
-     - restart_apache2
+    - restart_apache2
