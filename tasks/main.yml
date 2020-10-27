@@ -6,9 +6,6 @@
 #
 # Description:
 #   Role for deploy a Nextcloud server.
-#
-# https://computingforgeeks.com/how-to-install-nextcloud-on-ubuntu-debian/
-
 
 - name: "Install APT packages"
   apt:
