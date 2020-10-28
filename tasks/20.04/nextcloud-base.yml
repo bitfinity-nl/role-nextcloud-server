@@ -115,6 +115,19 @@
     - /etc/apache2/sites-available/000-default.conf
     - /etc/apache2/sites-available/000-default-le-ssl.conf
 
+- name: "Configure Apache2 - Enable HTTP Strict Transport Security"
+  blockinfile:
+    backup: yes
+    path: "{{ item }}"
+    marker: "        #-- {mark} Nextcloud - Enable HTTP Strict Transport Security - ANSIBLE MANAGED BLOCK --"
+    insertbefore: "</VirtualHost>"
+    block: |2
+               <IfModule mod_headers.c>
+                 Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains"
+              </IfModule>
+  with_items:
+    - /etc/apache2/sites-available/000-default-le-ssl.conf
+    
 - name: "Enable Apache2 modules"
   apache2_module:
     state: present
@@ -154,5 +167,7 @@
   with_items:
     - { find: 'memory_limit = 128M', replace: 'memory_limit = 1024M' }
     - { find: 'output_buffering = 4096', replace: ';output_buffering = 4096' }
+    - { find: 'upload_max_filesize = 2M', replace: 'upload_max_filesize = 4096M' }
+    - { find: 'post_max_size = 8M', replace: 'post_max_size = 5006M' }
   notify:
     - restart_apache2
