@@ -100,13 +100,16 @@
     insertbefore: "</VirtualHost>"
     block: |2
               <Directory /opt/nextcloud/>
-                  Require all granted
                   AllowOverride All
                   Options FollowSymLinks MultiViews
 
                   <IfModule mod_dav.c>
                     Dav off
                   </IfModule>
+                 
+                  SetEnv HOME /var/www/nextcloud
+                  SetEnv HTTP_HOME /var/www/nextcloud
+
               </Directory>
   with_items:
     - /etc/apache2/sites-available/000-default.conf
