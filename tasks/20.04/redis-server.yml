@@ -11,7 +11,7 @@
 #   https://bayton.org/docs/nextcloud/installing-nextcloud-on-ubuntu-16-04-lts-with-redis-apcu-ssl-apache/
 
 - name: "Install APT packages"
-  name:
+  apt:
     pkg:
     - redis
     - redis-server
