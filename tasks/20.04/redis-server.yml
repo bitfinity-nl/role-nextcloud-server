@@ -29,8 +29,8 @@
 
 - name: "Add Redis user to www-data"
   user:
-    name: redis
-    groups: www-data
+    name: www-data
+    groups: redis
 
 - name: "Restart apache2 service"
   systemd:
