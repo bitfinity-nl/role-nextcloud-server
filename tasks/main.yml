@@ -14,6 +14,7 @@
     - libapache2-mod-php
     - php-cli 
     - php-fpm 
+    - php-gmp
     - php-json 
     - php-intl 
     - php-imagick 
@@ -28,6 +29,15 @@
     - php-bcmath
     - wget
     - unzip
+
+- name: "Check if /opt/nextcloud exists"
+  stat:
+    path: /opt/nextcloud
+  register: result
+
+- name: "Display if path /opt/nextcloud  exist"
+  debug:
+    msg: "{{ result.stat.exists }}"
 
 - name: "Create initial database"
   mysql_db:
@@ -63,6 +73,14 @@
     mode: '0755'
     remote_src: yes
 
+- name: "Create Nextcloud data directory"
+  file:
+    path: "{{ nc_nextcloud_data_dir }}"
+    owner: www-data
+    group: www-data
+    mode: '0755'
+    state: directory
+
 - name: "Create symlink from /opt/nextcloud to /var/www/html"
   file:
     src: /opt/nextcloud
@@ -80,11 +98,10 @@
     insertbefore: "</VirtualHost>"
     block: |2
               <Directory /opt/nextcloud/>
-                  Options +FollowSymlinks
-                  AllowOverride All
                   Require all granted
-                  SetEnv HOME /opt/nextcloud
-                  SetEnv HTTP_HOME /opt/nextcloud
+                  AllowOverride All
+                  Options FollowSymLinks MultiViews
+
                   <IfModule mod_dav.c>
                     Dav off
                   </IfModule>
@@ -108,9 +125,28 @@
 
 - name: "Configure Nextcloud from commandline"
   shell:
-    cmd: | 
-      php occ  maintenance:install --database "mysql" --database-name "{{ nc_mariadb_dbname }}" 
+    cmd: >
+      sudo -u www-data php occ  maintenance:install --database "mysql" --database-name "{{ nc_mariadb_dbname }}" 
       --database-user "{{ nc_mariadb_user }}" --database-pass "{{ nc_mariadb_pass }}" 
       --admin-user "{{ nc_nextcloud_admin }}" --admin-pass "{{ nc_nextcloud_pass }}"
+      --data-dir "{{ nc_nextcloud_data_dir }}"
     chdir: /opt/nextcloud/
-  become_user: www-data
+  when: result.stat.exists == false
+
+- name: "Configure Nextcloud trusted domains"
+  lineinfile:
+    path: /opt/nextcloud/config/config.php
+    regexp: 0 => 'localhost',
+    insertafter: 0 => 'localhost',
+    line: 1 => '{{ nc_nextcloud_domain }}',
+
+- name: "PHP 7.4 tuning"
+  replace:
+    path: /etc/php/7.4/apache2/php.ini
+    regexp: "{{ item.find }}"
+    replace: "{{ item.replace }}"
+  with_items:
+    - { find: 'memory_limit = 128M', replace: 'memory_limit = 1024M' }
+#    - { regexp: 'memory_limit = 128M', replace: 'memory_limit = 1024M' }
+  notify:
+    - restart_apache2
