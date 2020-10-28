@@ -42,7 +42,7 @@
     path: /opt/nextcloud/config/config.php
     backup: yes
     marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
-    insertbefore: ");"
+    insertafter: "'installed' => true,"
     block: |2 
         'memcache.local' => '\\OC\\Memcache\\Redis',
         'memcache.locking' => '\\OC\\Memcache\\Redis',
