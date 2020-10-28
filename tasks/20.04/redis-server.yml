@@ -41,7 +41,7 @@
   blockinfile:
     path: /opt/nextcloud/config/config.php
     backup: yes
-    marker: "/*# -- {mark} ANSIBLE MANAGED BLOCK --*/"
+    marker: "  /*# -- {mark} ANSIBLE MANAGED BLOCK --*/"
     insertafter: "'installed' => true,"
     block: |2 
         'memcache.local' => '\\OC\\Memcache\\Redis',
@@ -49,9 +49,9 @@
         'filelocking.enabled' => 'true',
         'redis' => 
         array (
-        'host' => '/var/run/redis/redis.sock',
-        'port' => 0,
-        'timeout' => 0.0,
+          'host' => '/var/run/redis/redis-server.sock',
+          'port' => 0,
+          'timeout' => 0.0,
          ),
 
 - name: "Enable systemd redis-server for startup and start the service"
