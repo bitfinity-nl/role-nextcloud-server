@@ -1,1 +1,61 @@
 ---
+# Title: role-nextcloud-server
+#
+# Author: Bitfinity-NL / L. Rutten
+# File: tasks/20.04/redis-server.yml
+#
+# Description:
+#   Role for deploy a Nextcloud server.
+#
+# Source(s):
+#   https://bayton.org/docs/nextcloud/installing-nextcloud-on-ubuntu-16-04-lts-with-redis-apcu-ssl-apache/
+
+- name: "Install APT packages"
+  name:
+    pkg:
+    - redis
+    - redis-server
+    - php-redis
+
+- name: "Configure port 6379 to port 0 in /etc/redis/redis.conf"
+    path: /etc/redis/redis.conf
+    regexp: "{{ item.find }}"
+    replace: "{{ item.replace }}"
+  with_items:
+    - { find: 'port 6379', replace: 'port 0' }
+    - { find: '#unixsocket /var/run/redis/redis-server.sock', replace: 'unixsocket /var/run/redis/redis-server.sock' }
+    - { find: 'unixsocketperm 700', replace: 'unixsocketperm 770' }
+
+- name: "Add Redis user to www-data"
+  user:
+    name: redis
+    groups: www-data
+
+- name: "Restart apache2 service"
+  systemd:
+    name: apache2
+    state: restarted
+
+- name: "Configure Redis for Nextcloud"
+  blockinfile:
+    path: /opt/nextcloud/config/config.php
+    backup: yes
+    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
+    insertbefore: ");"
+    block: |2 
+        'memcache.local' => '\\OC\\Memcache\\Redis',
+        'memcache.locking' => '\\OC\\Memcache\\Redis',
+        'filelocking.enabled' => 'true',
+        'redis' => 
+        array (
+        'host' => '/var/run/redis/redis.sock',
+        'port' => 0,
+        'timeout' => 0.0,
+         ),
+
+- name: "Enable systemd redis-server for startup and start the service"
+  systemd:
+    name: redis-server
+    enabled: yes
+    state: started
+    
