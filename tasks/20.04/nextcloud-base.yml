@@ -63,7 +63,8 @@
   file:
     path: /var/www/html
     state: absent
-
+  when: result.stat.exists == false
+  
 - name: "Unarchive zip to /opt/nextcloud" 
   unarchive:
     src: "{{ nc_src_url }}" 
@@ -72,6 +73,7 @@
     group: www-data
     mode: '0755'
     remote_src: yes
+  when: result.stat.exists == false
 
 - name: "Create Nextcloud data directory"
   file:
