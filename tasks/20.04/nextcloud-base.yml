@@ -153,6 +153,6 @@
     replace: "{{ item.replace }}"
   with_items:
     - { find: 'memory_limit = 128M', replace: 'memory_limit = 1024M' }
-    - { regexp: 'output_buffering = 4096', replace: ';output_buffering = 4096' }
+    - { find: 'output_buffering = 4096', replace: ';output_buffering = 4096' }
   notify:
     - restart_apache2
