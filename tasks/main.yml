@@ -1,0 +1,9 @@
+---
+# Title: role-nextcloud-server
+#
+# Author: Bitfinity-NL / L. Rutten
+# File: tasks/main.yml
+#
+# Description:
+#   Role for deploy a Nextcloud server.
+
