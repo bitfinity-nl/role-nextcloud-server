@@ -17,7 +17,8 @@
     - redis-server
     - php-redis
 
-- name: "Configure port 6379 to port 0 in /etc/redis/redis.conf"
+- name: "Configure Redis /etc/redis/redis.conf"
+  replace:
     path: /etc/redis/redis.conf
     regexp: "{{ item.find }}"
     replace: "{{ item.replace }}"
