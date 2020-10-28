@@ -107,8 +107,8 @@
                     Dav off
                   </IfModule>
                  
-                  SetEnv HOME /var/www/nextcloud
-                  SetEnv HTTP_HOME /var/www/nextcloud
+                  SetEnv HOME /var/www/html
+                  SetEnv HTTP_HOME /var/www/html
 
               </Directory>
   with_items:
@@ -144,6 +144,7 @@
     regexp: 0 => 'localhost',
     insertafter: 0 => 'localhost',
     line: 1 => '{{ nc_nextcloud_domain }}',
+  when: result.stat.exists == false
 
 - name: "PHP 7.4 tuning"
   replace:
@@ -152,6 +153,6 @@
     replace: "{{ item.replace }}"
   with_items:
     - { find: 'memory_limit = 128M', replace: 'memory_limit = 1024M' }
-#    - { regexp: 'memory_limit = 128M', replace: 'memory_limit = 1024M' }
+    - { regexp: 'output_buffering = 4096', replace: ';output_buffering = 4096' }
   notify:
     - restart_apache2
