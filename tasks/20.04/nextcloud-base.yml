@@ -96,7 +96,7 @@
   blockinfile:
     backup: yes
     path: /etc/apache2/sites-available/000-default.conf
-    marker: "        #<!-- Nextcloud - ANSIBLE MANAGED BLOCK -->"
+    marker: "        #-- {mark} Nextcloud - ANSIBLE MANAGED BLOCK --"
     insertbefore: "</VirtualHost>"
     block: |2
               <Directory /opt/nextcloud/>
