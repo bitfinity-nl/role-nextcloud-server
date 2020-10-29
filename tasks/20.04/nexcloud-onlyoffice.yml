@@ -14,3 +14,4 @@
   with_items:
     - documentserver_community
     - onlyoffice
+  ignore_errors: yes
