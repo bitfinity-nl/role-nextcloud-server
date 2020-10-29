@@ -1,0 +1,16 @@
+---
+# Title: role-nextcloud-server
+#
+# Author: Bitfinity-NL / L. Rutten
+# File: tasks/20.04/nexcloud-onlyoffice.yml
+#
+# Description:
+#   Role for deploy a Nextcloud server.
+
+- name: "Install the Community Document Server and the Only Office App"
+  shell:
+    cmd: sudo -u www-data php occ app:install "{{ item}}"
+    chdir: /opt/nextcloud/
+  with_items:
+    - documentserver_community
+    - install onlyoffice
