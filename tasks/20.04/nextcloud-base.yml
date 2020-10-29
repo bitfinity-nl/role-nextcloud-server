@@ -127,7 +127,17 @@
               </IfModule>
   with_items:
     - /etc/apache2/sites-available/000-default-le-ssl.conf
-    
+
+- name: "Configure Apache2 for using .htaccess"
+  replace:
+    path: /etc/apache2/apache2.conf
+    regexp: "Options Indexes FollowSymLinks
+        AllowOverride None"
+    replace: "Options Indexes FollowSymLinks
+        AllowOverride All"
+    backup: yes
+
+
 - name: "Enable Apache2 modules"
   apache2_module:
     state: present
