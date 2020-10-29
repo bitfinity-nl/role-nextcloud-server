@@ -1,13 +1,18 @@
 # role-nextcloud-server
 =========
 
-This role contains the installation steps to setup a Nextcloud server.
+This role contains the installation steps to setup a Nextcloud server with OnlyOffice.
 
 Requirements
 ------------
 
 This role supports:
-- Ubuntu 20.04
+- Ubuntu 20.04;
+
+This role requires:
+- Ubuntu 20.04;
+- MySQL/MariaDB already installed (bitfinity-nl/role-certbot-apache2);
+- Letsencrypt certificate already installed (bitfinity-nl/role-mariadb-server-10.5 );
 
 Required steps:
 1. Register the (sub)domain; 
