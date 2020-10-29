@@ -132,7 +132,7 @@
   replace:
     path: "/etc/apache2/apache2.conf"
     regexp: '<Directory \/var\/www\/>\n(.*)\n(.*AllowOverride None)'
-    replace: '<Directory /var/www/>\n        Options Indexes FollowSymLinks\n        AllowOverride All>'
+    replace: '<Directory /var/www/>\n        Options Indexes FollowSymLinks\n        AllowOverride All'
     backup: yes
 
 - name: "Enable Apache2 modules"
