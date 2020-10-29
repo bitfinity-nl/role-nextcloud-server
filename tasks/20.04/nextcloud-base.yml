@@ -130,13 +130,10 @@
 
 - name: "Configure Apache2 for using .htaccess"
   replace:
-    path: /etc/apache2/apache2.conf
-    regexp: "Options Indexes FollowSymLinks
-        AllowOverride None"
-    replace: "Options Indexes FollowSymLinks
-        AllowOverride All"
+    path: "/tmp/apache2.conf"
+    regexp: '<Directory \/var\/www\/>\n(.*)\n(.*AllowOverride None)'
+    replace: '<Directory /var/www/>\n        Options Indexes FollowSymL>
     backup: yes
-
 
 - name: "Enable Apache2 modules"
   apache2_module:
