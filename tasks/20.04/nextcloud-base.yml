@@ -130,7 +130,7 @@
 
 - name: "Configure Apache2 for using .htaccess"
   replace:
-    path: "/tmp/apache2.conf"
+    path: "/etc/apache2/apache2.conf"
     regexp: '<Directory \/var\/www\/>\n(.*)\n(.*AllowOverride None)'
     replace: '<Directory /var/www/>\n        Options Indexes FollowSymL>'
     backup: yes
