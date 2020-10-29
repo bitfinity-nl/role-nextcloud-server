@@ -13,4 +13,4 @@
     chdir: /opt/nextcloud/
   with_items:
     - documentserver_community
-    - install onlyoffice
+    - onlyoffice
