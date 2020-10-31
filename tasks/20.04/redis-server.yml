@@ -27,10 +27,15 @@
     - { find: '# unixsocket /var/run/redis/redis-server.sock', replace: 'unixsocket /var/run/redis/redis-server.sock' }
     - { find: '# unixsocketperm 700', replace: 'unixsocketperm 770' }
 
+#- name: "Add Redis user to www-data"
+#  user:
+#    name: www-data
+#    groups: redis
+
 - name: "Add Redis user to www-data"
   user:
-    name: www-data
-    groups: redis
+    name: redis
+    groups: www-data
 
 - name: "Restart apache2 service"
   systemd:
