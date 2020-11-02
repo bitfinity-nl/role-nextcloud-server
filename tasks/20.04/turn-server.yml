@@ -1,0 +1,40 @@
+---
+# Title: role-nextcloud-server (not working)
+#
+# Author: Bitfinity-NL / L. Rutten
+# File: tasks/20.04/turn-server.yml
+#
+# Description:
+#   Role for deploy a Nextcloud server.
+#
+# Sources:
+#   https://www.youtube.com/watch?v=RPireLVSPAo
+
+- name: "Install APT packages"
+  apt:
+    pkg:
+    - coturn
+
+- name: "Stop systemd service coturn"
+  systemd:
+    name: coturn
+    state: stopped
+
+- name: "Transfer templates to host (not ready"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: 'templates/20.04/turn-server/coturn.j2', dest: '/etc/default/coturn' }
+    - { src: 'templates/20.04/turn-server/turnserver.conf.j2', dest: '/etc/turnserver.conf' }
+
+- name: "Configure /etc/turnserver.conf"
+  raw: sed -i "s/north/$(openssl rand -hex 32)/" /etc/turnserver.conf
+  
+- name: "Start systemd service coturn"
+  systemd:
+    name: coturn
+    state: started
+
+- name: "Allow "
+  
