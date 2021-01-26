@@ -17,8 +17,8 @@
 - name: "Add CODE package repositories"
   apt_repository:
     repo: deb https://www.collaboraoffice.com/repos/CollaboraOnline/CODE-debian9 ./
+    filename: CollaboraOnline
     state: present
-
 
 - name: Run the equivalent of "apt-get update" as a separate step
   apt:
