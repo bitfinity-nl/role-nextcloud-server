@@ -20,7 +20,7 @@
 #    - ansible_architecture == "x86_64"
 
 - name: "For OS: Ubuntu 20.04LTS, Arch: amd64"
-  import_tasks: 20.04/nexcloud-code.yml
+  import_tasks: 20.04/nextcloud-code.yml
   when:
     - ansible_distribution_version == "20.04"
     - ansible_architecture == "x86_64"
