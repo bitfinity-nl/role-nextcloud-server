@@ -27,6 +27,26 @@
 - name: "Install packages"
   apt:
     pkg:
+    - apache2
     - loolwsd
     - code-brand
     - collaboraoffice*
+
+- name: "Install packages"
+  apache2_module:
+    - proxy
+    - proxy_wstunnel
+    - proxy_http
+    - ssl
+    
+- name: "Transfer Apache2 templates"
+  template:
+    src: collabora-ssl.conf.j2
+    dest: /var/ww/sites-available/collabora-ssl.conf
+    owner: root
+    groups: root
+    mode: 0744
+    
+    
+    
+  
