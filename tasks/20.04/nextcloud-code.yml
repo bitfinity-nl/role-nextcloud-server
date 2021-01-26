@@ -47,7 +47,7 @@
     src: collabora-ssl.conf.j2
     dest: /var/ww/sites-available/collabora-ssl.conf
     owner: root
-    groups: root
+    group: root
     mode: 0744
     
     
