@@ -34,6 +34,9 @@
 
 - name: "Install packages"
   apache2_module:
+    name: "{{ item }}"
+    state: present
+  with_items:
     - proxy
     - proxy_wstunnel
     - proxy_http
