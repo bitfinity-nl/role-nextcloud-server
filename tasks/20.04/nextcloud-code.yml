@@ -45,7 +45,7 @@
 - name: "Transfer Apache2 templates"
   template:
     src: collabora-ssl.conf.j2
-    dest: /var/ww/sites-available/collabora-ssl.conf
+    dest: /etc/apache2/sites-available/collabora-ssl.conf
     owner: root
     group: root
     mode: 0744
