@@ -18,10 +18,14 @@
   apt_repository:
     repo: deb https://www.collaboraoffice.com/repos/CollaboraOnline/CODE-debian9 ./
     state: present
+
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
     
 - name: "Install packages"
   apt:
     pkg:
     - loolwsd
     - code-brand
-  update_cache: yes
