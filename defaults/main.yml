@@ -36,3 +36,12 @@ nc_nextcloud_admin    : 'sysadmin'
 nc_nextcloud_pass     : 'Password'
 nc_nextcloud_data_dir : '/mnt/nextcloud/data'
 nc_nextcloud_domain   : 'test.bitfinity.nl'
+
+
+# -- Collabora Online 
+col_servername              : 'collabora.bitfinity.nl'
+col_sslcertificatefile      : '/path/to/signed_certificate'
+col_sslcertificatechainfile : '/path/to/intermediate_certificate'
+col_sslcertificateKeyfile   : '/path/to/private/key'
+
+
