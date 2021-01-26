@@ -1,0 +1,26 @@
+---
+# Title: role-nextcloud-server
+#
+# Author: Bitfinity-NL / L. Rutten
+# File: tasks/20.04/nexcloud-code.yml
+# Original sources:
+#   - https://www.collaboraoffice.com/code/linux-packages/
+#
+# Description:
+#   Role for deploy a Nextcloud server.
+
+- name: "Import the signing key"
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 0C54D189F4BA284D
+
+- name: "Add CODE package repositories"
+  apt_repository:
+    repo: deb https://www.collaboraoffice.com/repos/CollaboraOnline/CODE-debian9 ./
+    state: present
+    
+- name: "Install packages"
+  apt:
+    pkg:
+    - loolwsd
+    - code-brand
