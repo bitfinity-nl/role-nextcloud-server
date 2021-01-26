@@ -16,7 +16,7 @@
 
 - name: "Add CODE package repositories"
   apt_repository:
-    repo: deb https://www.collaboraoffice.com/repos/CollaboraOnline/CODE-debian9 ./
+    repo: deb https://www.collaboraoffice.com/repos/CollaboraOnline/CODE-ubuntu2004 ./
     filename: CollaboraOnline
     state: present
 
