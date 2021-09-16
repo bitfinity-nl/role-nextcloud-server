@@ -84,6 +84,13 @@
     mode: '0755'
     state: directory
 
+- name: "Correct permissions on /opt/nextcloud"
+  file:
+    src: /opt/nextcloud/
+    owner: www-data
+    group: www-data
+    mode: '0755'
+    
 - name: "Create symlink from /opt/nextcloud to /var/www/html"
   file:
     src: /opt/nextcloud
